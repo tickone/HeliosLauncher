@@ -46,11 +46,6 @@ body, button {
     color: white;
 }
 
-/*body {
-    background: url('./../images/backgrounds/0.jpg') no-repeat center center fixed;
-    background-size: cover;
-}*/
-
 /*******************************************************************************
  *                                                                             *
  * Frame Styles (frame.ejs)                                                    *
@@ -541,15 +536,15 @@ body, button {
     10%, 90% {
         transform: translate3d(-1px, 0, 0);
     }
-    
+
     20%, 80% {
         transform: translate3d(2px, 0, 0);
     }
-  
+
     30%, 50%, 70% {
         transform: translate3d(-4px, 0, 0);
     }
-  
+
     40%, 60% {
         transform: translate3d(4px, 0, 0);
     }
@@ -858,19 +853,6 @@ body, button {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-
-/*
-#login_filter {
-    height: calc(100% - 22px);
-    width: 100%;
-    z-index: 9000;
-    position: absolute;
-    filter: blur(8px) contrast(0.9) brightness(1.0);
-    background: url('./../images/backgrounds/0.jpg') no-repeat center center fixed;
-    transform: scale(1.2);
-    background-size: cover;
-}
-*/
 
 /*******************************************************************************
  *                                                                             *
@@ -3236,7 +3218,7 @@ input:checked + .toggleSwitchSlider:before {
     top: 25px;
     display: none;
 }
- 
+
 /* Left side of launch details container, displays percentage and a divider. */
 #launch_details_left {
     display: flex;
