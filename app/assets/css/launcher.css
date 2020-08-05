@@ -2314,7 +2314,8 @@ input:checked + .toggleSwitchSlider:before {
     height: 100%;
     width: 33%;
     display: block;
-    text-align: center;
+    text-align: right;
+    margin-right: 9%;
 }
 
 /*******************************************************************************
