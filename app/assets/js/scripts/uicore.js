@@ -46,12 +46,12 @@ if(!isDev){
                 break
             case 'update-available':
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
-                
+
                 if(process.platform === 'darwin'){
                     info.darwindownload = `https://github.com/dscalzi/HeliosLauncher/releases/download/v${info.version}/helioslauncher-setup-${info.version}.dmg`
-                    showUpdateUI(info)
+
                 }
-                
+
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-downloaded':
@@ -61,7 +61,6 @@ if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
                 })
-                showUpdateUI(info)
                 break
             case 'update-not-available':
                 loggerAutoUpdater.log('No new update found.')
@@ -97,35 +96,35 @@ if(!isDev){
  * allowPrerelease. If we are running a prerelease version, then
  * this will always be set to true, regardless of the current value
  * of val.
- * 
+ *
  * @param {boolean} val The new allow prerelease value.
  */
 function changeAllowPrerelease(val){
     ipcRenderer.send('autoUpdateAction', 'allowPrereleaseChange', val)
 }
 
-function showUpdateUI(info){
-    //TODO Make this message a bit more informative `${info.version}`
-    document.getElementById('image_seal_container').setAttribute('update', true)
-    document.getElementById('image_seal_container').onclick = () => {
-        /*setOverlayContent('Update Available', 'A new update for the launcher is available. Would you like to install now?', 'Install', 'Later')
-        setOverlayHandler(() => {
-            if(!isDev){
-                ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
-            } else {
-                console.error('Cannot install updates in development environment.')
-                toggleOverlay(false)
-            }
-        })
-        setDismissHandler(() => {
-            toggleOverlay(false)
-        })
-        toggleOverlay(true, true)*/
-        switchView(getCurrentView(), VIEWS.settings, 500, 500, () => {
-            settingsNavItemListener(document.getElementById('settingsNavUpdate'), false)
-        })
-    }
-}
+// function showUpdateUI(info){
+//     //TODO Make this message a bit more informative `${info.version}`
+//     document.getElementById('image_seal_container').setAttribute('update', true)
+//     document.getElementById('image_seal_container').onclick = () => {
+//         /*setOverlayContent('Update Available', 'A new update for the launcher is available. Would you like to install now?', 'Install', 'Later')
+//         setOverlayHandler(() => {
+//             if(!isDev){
+//                 ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
+//             } else {
+//                 console.error('Cannot install updates in development environment.')
+//                 toggleOverlay(false)
+//             }
+//         })
+//         setDismissHandler(() => {
+//             toggleOverlay(false)
+//         })
+//         toggleOverlay(true, true)*/
+//         switchView(getCurrentView(), VIEWS.settings, 500, 500, () => {
+//             settingsNavItemListener(document.getElementById('settingsNavUpdate'), false)
+//         })
+//     }
+// }
 
 /* jQuery Example
 $(function(){
@@ -187,7 +186,7 @@ document.addEventListener('readystatechange', function () {
         document.getElementById('launch_progress').style.width = 170.8
         document.getElementById('launch_details_right').style.maxWidth = 170.8
         document.getElementById('launch_progress_label').style.width = 53.21
-        
+
     }
 
 }, false)
@@ -203,7 +202,7 @@ $(document).on('click', 'a[href^="http"]', function(event) {
 /**
  * Opens DevTools window if you hold (ctrl + shift + i).
  * This will crash the program if you are using multiple
- * DevTools, for example the chrome debugger in VS Code. 
+ * DevTools, for example the chrome debugger in VS Code.
  */
 document.addEventListener('keydown', function (e) {
     if((e.key === 'I' || e.key === 'i') && e.ctrlKey && e.shiftKey){
