@@ -2930,13 +2930,13 @@ input:checked + .toggleSwitchSlider:before {
     transition-delay:0s;
 }
 
-/* Twitter icon colors. */
-#twitterSVG:hover,
-#twitterURL:focus #twitterSVG {
-    fill: #1da1f2;
+/* facebook icon colors. */
+#facebookSVG:hover,
+#facebookURL:focus #facebookSVG {
+    fill: #3b5998;
 }
-#twitterSVG:active {
-    fill: #1b8dd4;
+#facebookSVG:active {
+    fill: #2f477a;
 }
 
 /* Instagram icon colors. */
