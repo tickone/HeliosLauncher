@@ -2313,7 +2313,8 @@ input:checked + .toggleSwitchSlider:before {
     top: 0px;
     height: 100%;
     width: 33%;
-    display: inline-flex;
+    display: block;
+    text-align: center;
 }
 
 /*******************************************************************************
