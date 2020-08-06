@@ -3,14 +3,10 @@
  */
 // Requirements
 const cp                      = require('child_process')
-const crypto                  = require('crypto')
-const {URL}                   = require('url')
 
 // Internal Requirements
 const DiscordWrapper          = require('./assets/js/discordwrapper')
-const Mojang                  = require('./assets/js/mojang')
 const ProcessBuilder          = require('./assets/js/processbuilder')
-const ServerStatus            = require('./assets/js/serverstatus')
 
 // Launch Elements
 const launch_content          = document.getElementById('launch_content')
@@ -58,7 +54,7 @@ function setLaunchDetails(details){
 function setLaunchPercentage(value, max, percent = ((value/max)*100)){
     launch_progress.setAttribute('max', max)
     launch_progress.setAttribute('value', value)
-    launch_progress_label.innerHTML = percent + '%'
+    launch_progress_label.innerHTML = percent === null ? '100%' : percent + '%'
 }
 
 /**
@@ -170,7 +166,6 @@ function showLaunchFailure(title, desc){
 /* System (Java) Scan */
 
 let sysAEx
-let scanAt
 
 let extractListener
 
