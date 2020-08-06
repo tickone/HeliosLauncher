@@ -92,7 +92,7 @@ function showMainUI(data){
 
         setTimeout(() => {
             $('#loadingContainer').fadeOut(500, () => {
-                $('#loadSpinnerImage').removeClass('rotating')
+
             })
         }, 250)
 
