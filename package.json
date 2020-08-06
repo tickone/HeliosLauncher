@@ -1,7 +1,7 @@
 {
-  "name": "helioslauncher",
-  "version": "1.7.0",
-  "productName": "Helios Launcher",
+  "name": "caslauncher",
+  "version": "0.0.1",
+  "productName": "CAS Launcher",
   "description": "Modded Minecraft Launcher",
   "author": "Daniel Scalzi (https://github.com/dscalzi/)",
   "license": "UNLICENSED",
