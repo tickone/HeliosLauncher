@@ -870,7 +870,7 @@ function loadSelectedServerOnModsTab(){
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
 
     document.getElementById('settingsSelServContent').innerHTML = `
-        <img class="serverListingImg"/>
+        <img class="serverListingImg" src="${serv.getIcon()}"/>
         <div class="serverListingDetails">
             <span class="serverListingName">${serv.getName()}</span>
             <span class="serverListingDescription">${serv.getDescription()}</span>
