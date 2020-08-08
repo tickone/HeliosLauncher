@@ -277,7 +277,7 @@ body, button {
     margin-top: 10%;
 }
 
-#welcomeHeader {
+.welcomeHeader {
     font-family: 'Avenir Medium';
     text-align: center;
     color: white;
@@ -287,14 +287,14 @@ body, button {
     text-shadow: white 0px 0px 0px;
 }
 
-#welcomeDescription {
+.welcomeDescription {
     text-align: justify;
     font-size: 13px;
     font-weight: 100;
     text-shadow: rgba(255, 255, 255, 0.75) 0px 0px 20px
 }
 
-#welcomeDescCTA {
+.welcomeDescCTA {
     text-align: center;
     font-size: 14px;
     font-weight: 100;
