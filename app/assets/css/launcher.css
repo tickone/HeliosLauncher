@@ -290,14 +290,14 @@ body, button {
 .welcomeDescription {
     text-align: justify;
     font-size: 13px;
-    font-weight: 100;
+    font-weight: 400;
     text-shadow: rgba(255, 255, 255, 0.75) 0px 0px 20px
 }
 
 .welcomeDescCTA {
     text-align: center;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 400;
     text-shadow: rgba(255, 255, 255, 0.75) 0px 0px 20px
 }
 
