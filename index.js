@@ -97,7 +97,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: 980,
         height: 552,
-        icon: getPlatformIcon('SealCircle'),
+        icon: getPlatformIcon('profile-new-01'),
         frame: false,
         webPreferences: {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
@@ -112,6 +112,9 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }))
+
+    // // open devtool
+    // win.webContents.openDevTools()
 
     /*win.once('ready-to-show', () => {
         win.show()
