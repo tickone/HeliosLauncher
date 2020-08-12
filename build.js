@@ -18,7 +18,7 @@ function getCurrentPlatform(){
 builder.build({
     targets: (process.argv[2] != null && Platform[process.argv[2]] != null ? Platform[process.argv[2]] : getCurrentPlatform()).createTarget(),
     config: {
-        appId: 'caslauncher',
+        appId: 'com.caslauncher',
         productName: 'CAS Launcher',
         artifactName: '${productName}-setup-${version}.${ext}',
         copyright: 'Copyright © 2018-2020 Daniel Scalzi',
@@ -59,7 +59,8 @@ builder.build({
         extraResources: [
             'libraries'
         ],
-        asar: true
+        asar: true,
+        afterSign: './afterSignHook.js',
     }
 }).then(() => {
     console.log('Build complete!')
