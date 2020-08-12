@@ -411,12 +411,12 @@ function dlAsync(login = true){
     })
     aEx.on('error', (err) => {
         loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
+        showLaunchFailure('Error During Launch', err.message || 'See console for more details.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error During Launch', 'See console (CTRL + Shift + i) for more details.')
+            showLaunchFailure('Error During Launch', 'See console for more details.')
         }
     })
 
@@ -506,7 +506,7 @@ function dlAsync(login = true){
                     } else {
                         showLaunchFailure(
                             'Download Error',
-                            'Check the console (CTRL + Shift + i) for more details. Please try again.'
+                            'Check the console for more details. Please try again.'
                         )
                     }
 
@@ -525,7 +525,7 @@ function dlAsync(login = true){
                 loggerLaunchSuite.error('Error during validation:', m.result)
 
                 loggerLaunchSuite.error('Error during launch', m.result.error)
-                showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                showLaunchFailure('Error During Launch', 'Please check the console for more details.')
 
                 allGood = false
             }
@@ -609,7 +609,7 @@ function dlAsync(login = true){
                 } catch(err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                    showLaunchFailure('Error During Launch', 'Please check the console for more details.')
 
                 }
             }
@@ -638,7 +638,7 @@ function dlAsync(login = true){
         }, (err) => {
             loggerLaunchSuite.error('Unable to refresh distribution index.', err)
             if(DistroManager.getDistribution() == null){
-                showLaunchFailure('Fatal Error', 'Could not load a copy of the distribution index. See the console (CTRL + Shift + i) for more details.')
+                showLaunchFailure('Fatal Error', 'Could not load a copy of the distribution index. See the console for more details.')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
