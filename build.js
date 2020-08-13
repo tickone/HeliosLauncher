@@ -21,7 +21,7 @@ builder.build({
         appId: 'com.virtualhkc',
         productName: 'VirtualHKC',
         artifactName: '${productName}-setup-${version}.${ext}',
-        copyright: 'Copyright © 2018-2020 Daniel Scalzi',
+        copyright: 'Copyright © 2020 VirtualHKC',
         directories: {
             buildResources: 'build',
             output: 'dist'
