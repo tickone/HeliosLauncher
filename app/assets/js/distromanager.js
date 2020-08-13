@@ -538,9 +538,9 @@ exports.pullRemote = function(){
     }
     return new Promise((resolve, reject) => {
         const urls = {
-            darwin: 'https://d35i8e8nn2fgzy.cloudfront.net/callstar_mac/distribution.json',
+            darwin: 'https://virtualhkc.azureedge.net/callstar/mac/distribution.json',
         }
-        const distroURL = urls[process.platform] || 'https://d35i8e8nn2fgzy.cloudfront.net/callstar/distribution.json'
+        const distroURL = urls[process.platform] || 'https://virtualhkc.azureedge.net/callstar/windows/distribution.json'
 
         const opts = {
             url: distroURL,
