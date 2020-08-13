@@ -1,7 +1,7 @@
 {
-  "name": "caslauncher",
+  "name": "virtualhkc",
   "version": "0.0.1",
-  "productName": "CAS Launcher",
+  "productName": "VirtualHKC",
   "description": "Modded Minecraft Launcher",
   "author": "Daniel Scalzi (https://github.com/dscalzi/)",
   "license": "UNLICENSED",
