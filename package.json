@@ -3,12 +3,7 @@
   "version": "0.0.1",
   "productName": "VirtualHKC",
   "description": "Modded Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/)",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
-  "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
-  },
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -45,9 +40,5 @@
     "electron-builder": "^22.7.0",
     "electron-notarize": "^1.0.0",
     "eslint": "^7.4.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
   }
 }
