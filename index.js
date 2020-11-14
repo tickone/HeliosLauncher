@@ -114,7 +114,7 @@ function createWindow() {
     }))
 
     // prevent developer tool
-    win.webContents.on('devtools-opened', () => { win.webContents.closeDevTools() })
+    // win.webContents.on('devtools-opened', () => { win.webContents.closeDevTools() })
 
     // // open devtool
     // win.webContents.openDevTools()
