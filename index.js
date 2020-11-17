@@ -7,6 +7,7 @@ const isDev                         = require('./app/assets/js/isdev')
 const path                          = require('path')
 const semver                        = require('semver')
 const url                           = require('url')
+const winHardware                      = require('winDrivelist.json');
 
 // Setup auto updater.
 function initAutoUpdater(event, data) {
@@ -230,3 +231,96 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+// detect win/mac hardware infomation
+const os = require('os')
+
+const platforms = {
+  WINDOWS: 'WINDOWS',
+  MAC: 'MAC',
+};
+
+const platformsNames = {
+  win32: platforms.WINDOWS,
+  darwin: platforms.MAC,
+};
+
+const currentPlatform = platformsNames[os.platform()];
+
+const findHandlerOrDefault = (handlerName, dictionary) => {
+  const handler = dictionary[handlerName];
+
+  if (handler) {
+    return handler
+  }
+
+  if (dictionary.default) {
+    return dictionary.default
+  }
+
+  return () => null;
+};
+
+// detect Windows hardware
+if (winHardware >= 1061 || winHardware >= 1135) {
+} else { 
+    alert("the windows hardware is not recommended.")
+}
+
+// detect Mac hardware
+os.platform() === 'darwin'
+os.hostname()
+
+const macHardware;
+
+if ( macHardware >= 'Macbook-Pro-MId-2014' || macHardware >= 'Maccook-Early-2015' || macHardware >= 'Macbook-Air-2017') {
+} else {
+    alert("the Mac hardware is not recommended.")
+}
+
+
+
+// windows version test (for michael to decide)
+
+// const releaseTest = {
+//   [platforms.WINDOWS]: (version) => {
+//     const [majorVersion, minorVersion] = version.split('.');
+
+//     if (majorVersion === '10') {
+//       return releases.WIN10;
+//     }
+
+//     // Windows 8.1 (6,3)
+//     // Windows 8 (6,2)
+//     // Windows 7 (6,1)
+//     if (majorVersion === '6') {
+//       if (minorVersion === '3' || minorVersion === '2') {
+//         return releases.WIN8;
+//       }
+
+//       return releases.WIN7;
+//     }
+
+//     return releases.WIN7;
+//   },
+//   [platforms.MAC]: () => releases.ANY,
+//   [platforms.LINUX]: () => releases.ANY,
+// };
+
+// const currentRelease = releaseTest[currentPlatform](os.release());
+
+// const byRelease = findHandlerOrDefault.bind(null, currentRelease);
+
+// // usage
+// const whatWindowsIsHeUsing = byOS({
+//   [WINDOWS]: byRelease({
+//     [WIN7]: username => `Hi ${username}! You are using Windows 7.`,
+//     [WIN8]: username => `Hi ${username}! You are using Windows 8.`,
+//     [WIN10]: username => `Hi ${username}! You are using Windows 10.`,
+//   }),
+// });
+
+
+
+
+
