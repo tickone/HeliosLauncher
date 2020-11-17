@@ -126,26 +126,29 @@ function createWindow() {
 
     const [cpu] = os.cpus()
     if (process.platform === 'darwin') {
-        const plist = bplist.parseFile(`${process.env.HOME}/Library/Preferences/com.apple.SystemProfiler.plist`)
-        const type = plist['CPU Names'][Object.keys(plist['CPU Names'])[0]]
-        const [year] = type.match(/\d{4}/)
-        const [, intel] = type.match(/i(\d)/)
+        bplist
+            .parseFile(`${process.env.HOME}/Library/Preferences/com.apple.SystemProfiler.plist`)
+            .then(plist => {
+                const type = plist['CPU Names'][Object.keys(plist['CPU Names'])[0]]
+                const [year] = type.match(/\d{4}/)
+                const [, intel] = type.match(/i(\d)/)
 
-        if (type.includes('Macbook Pro')) {
-            if (year <= 2014 && intel < 5) {
-                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Pro must be greater or equal to 2014 model, Intel i5 CPU' })
-            }
-        } else if (type.includes('Macbook Air')) {
-            if (year < 2017) {
-                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Air must be greater than 2017 model.' })
-            } else {
-                dialog.showMessageBoxSync({ message: 'We do not recommend you use Macbook Air to play minecraft.' })
-            }
-        } else if (type.includes('Macbook')) {
-            if (year <= 2015 && intel < 5) {
-                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
-            }
-        }
+                if (type.includes('Macbook Pro')) {
+                    if (year <= 2014 && intel < 5) {
+                        dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Pro must be greater or equal to 2014 model, Intel i5 CPU' })
+                    }
+                } else if (type.includes('Macbook Air')) {
+                    if (year < 2017) {
+                        dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Air must be greater than 2017 model.' })
+                    } else {
+                        dialog.showMessageBoxSync({ message: 'We do not recommend you use Macbook Air to play minecraft.' })
+                    }
+                } else if (type.includes('Macbook')) {
+                    if (year <= 2015 && intel < 5) {
+                        dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+                    }
+                }
+            })
     } else if (process.platform === 'win32') {
         const { model } = cpu
         const cpuinfo = model
