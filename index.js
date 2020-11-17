@@ -1,28 +1,29 @@
 // Requirements
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
-const autoUpdater                   = require('electron-updater').autoUpdater
-const ejse                          = require('ejs-electron')
-const fs                            = require('fs')
-const isDev                         = require('./app/assets/js/isdev')
-const path                          = require('path')
-const semver                        = require('semver')
-const url                           = require('url')
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require('electron')
+const autoUpdater = require('electron-updater').autoUpdater
+const isDev = require('./app/assets/js/isdev')
+const path = require('path')
+const semver = require('semver')
+const url = require('url')
+const os = require('os')
+const axios = require('axios')
+const bplist = require('bplist-parser')
 
 // Setup auto updater.
 function initAutoUpdater(event, data) {
 
-    if(data){
+    if (data) {
         autoUpdater.allowPrerelease = true
     } else {
         // Defaults to true if application version contains prerelease components (e.g. 0.12.1-alpha.1)
         // autoUpdater.allowPrerelease = true
     }
 
-    if(isDev){
+    if (isDev) {
         autoUpdater.autoInstallOnAppQuit = false
         autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
     }
-    if(process.platform === 'darwin'){
+    if (process.platform === 'darwin') {
         autoUpdater.autoDownload = false
     }
     autoUpdater.on('update-available', (info) => {
@@ -44,7 +45,7 @@ function initAutoUpdater(event, data) {
 
 // Open channel to listen for update actions.
 ipcMain.on('autoUpdateAction', (event, arg, data) => {
-    switch(arg){
+    switch (arg) {
         case 'initAutoUpdater':
             console.log('Initializing auto updater.')
             initAutoUpdater(event, data)
@@ -57,9 +58,9 @@ ipcMain.on('autoUpdateAction', (event, arg, data) => {
                 })
             break
         case 'allowPrereleaseChange':
-            if(!data){
+            if (!data) {
                 const preRelComp = semver.prerelease(app.getVersion())
-                if(preRelComp != null && preRelComp.length > 0){
+                if (preRelComp != null && preRelComp.length > 0) {
                     autoUpdater.allowPrerelease = true
                 } else {
                     autoUpdater.allowPrerelease = data
@@ -123,6 +124,62 @@ function createWindow() {
         win.show()
     })*/
 
+    const [cpu] = os.cpus()
+    if (process.platform === 'darwin') {
+        const plist = bplist.parseFile(`${process.env.HOME}/Library/Preferences/com.apple.SystemProfiler.plist`)
+        const type = plist['CPU Names'][Object.keys(plist['CPU Names'])[0]]
+        const [year] = type.match(/\d{4}/)
+        const [, intel] = type.match(/i(\d)/)
+
+        if (type.includes('Macbook Pro')) {
+            if (year <= 2014 && intel < 5) {
+                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+            }
+        } else if (type.includes('Macbook Air')) {
+            if (year < 2017) {
+                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+            } else {
+                dialog.showMessageBoxSync({ message: 'We do not recommend you use Macbook Air to play minecraft.' })
+            }
+        } else if (type.includes('Macbook')) {
+            if (year <= 2015 && intel < 5) {
+                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+            }
+        }
+    } else if (process.platform === 'win32') {
+        const { model } = cpu
+        const cpuinfo = model
+            .match(/[A-Za-z]{2,}|i\d+-\d{3,}[A-Z]*/ig)
+            .filter(value => {
+                const forbidden = [
+                    'TM',
+                    'CPU',
+                    'GHz',
+                    'Core'
+                ]
+
+                return !forbidden.includes(value)
+            })
+
+        axios
+            .get('https://browser.geekbench.com/processor-benchmarks.json')
+            .then(response => {
+                const devices = response.data.devices
+
+                const cputype = devices.find(device => {
+                    const name = device.name
+
+                    return cpuinfo.every(value => name.includes(value))
+                })
+
+                if (cputype && cputype.score < 745) {
+                    dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+                } else if (os.totalmem() / (1024 ** 3) < 8) {
+                    dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. (memory is less than 8GB)' })
+                }
+            })
+    }
+
     win.removeMenu()
 
     win.resizable = true
@@ -134,7 +191,7 @@ function createWindow() {
 
 function createMenu() {
 
-    if(process.platform === 'darwin') {
+    if (process.platform === 'darwin') {
 
         // Extend default included application menu to continue support for quit keyboard shortcut
         let applicationSubMenu = {
@@ -196,9 +253,9 @@ function createMenu() {
 
 }
 
-function getPlatformIcon(filename){
+function getPlatformIcon(filename) {
     let ext
-    switch(process.platform) {
+    switch (process.platform) {
         case 'win32':
             ext = 'ico'
             break
