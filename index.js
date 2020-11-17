@@ -133,11 +133,11 @@ function createWindow() {
 
         if (type.includes('Macbook Pro')) {
             if (year <= 2014 && intel < 5) {
-                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Pro must be greater or equal to 2014 model, Intel i5 CPU' })
             }
         } else if (type.includes('Macbook Air')) {
             if (year < 2017) {
-                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
+                dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Air must be greater than 2017 model.' })
             } else {
                 dialog.showMessageBoxSync({ message: 'We do not recommend you use Macbook Air to play minecraft.' })
             }
