@@ -8,6 +8,7 @@ const url = require('url')
 const os = require('os')
 const axios = require('axios')
 const bplist = require('bplist-parser')
+const ejse = require('ejs-electron')
 
 // Setup auto updater.
 function initAutoUpdater(event, data) {
@@ -125,32 +126,32 @@ function createWindow() {
     })*/
 
     const [cpu] = os.cpus()
+    const { model } = cpu
     if (process.platform === 'darwin') {
         bplist
             .parseFile(`${process.env.HOME}/Library/Preferences/com.apple.SystemProfiler.plist`)
             .then(plist => {
-                const type = plist['CPU Names'][Object.keys(plist['CPU Names'])[0]]
-                const [year] = type.match(/\d{4}/)
-                const [, intel] = type.match(/i(\d)/)
+                const type = plist[0]['CPU Names'][Object.keys(plist[0]['CPU Names'])[0]]
+                const [year] = type.match(/\d{4}/) || []
+                const [, intel] = model.match(/i(\d)/) || []
 
-                if (type.includes('Macbook Pro')) {
+                if (type.includes('MacBook Pro')) {
                     if (year <= 2014 && intel < 5) {
                         dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Pro must be greater or equal to 2014 model, Intel i5 CPU' })
                     }
-                } else if (type.includes('Macbook Air')) {
+                } else if (type.includes('MacBook Air')) {
                     if (year < 2017) {
                         dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft. Macbook Air must be greater than 2017 model.' })
                     } else {
                         dialog.showMessageBoxSync({ message: 'We do not recommend you use Macbook Air to play minecraft.' })
                     }
-                } else if (type.includes('Macbook')) {
+                } else if (type.includes('MacBook')) {
                     if (year <= 2015 && intel < 5) {
                         dialog.showMessageBoxSync({ message: 'Your hardware is not recommended to play minecraft.' })
                     }
                 }
             })
     } else if (process.platform === 'win32') {
-        const { model } = cpu
         const cpuinfo = model
             .match(/[A-Za-z]{2,}|i\d+-\d{3,}[A-Z]*/ig)
             .filter(value => {
